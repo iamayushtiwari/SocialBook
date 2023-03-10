@@ -2,9 +2,19 @@ const express = require('express')
 const port = 8000;
 const app = express();
 const expressLayout = require('express-ejs-layouts')
+const db = require('./config/mongoose')
+const cookieParser = require('cookie-parser')
+
+//setup static folder path
+app.use(express.static('./assets'))
+
 app.use(expressLayout)
 
-app.use(express.static('./assets'))
+// express ulr encoded
+app.use(express.urlencoded())
+ 
+// express cookie parser
+app.use(cookieParser())
 
 // add dynamic style and script true 
 app.set('layout extractStyles',true)
