@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy')
+const MongoStore = require('connect-mongo')(session);
 
 //setup static folder path
 app.use(express.static('./assets'))
@@ -34,7 +35,16 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: 60 * 1000 * 100
-    }
+    },
+    store: new MongoStore(
+        {
+            mongooseConnection:db,
+            autoRemove:'disabled'
+        },
+        function(err){
+            console.log(err || "connect-mongodb setup ok...!")
+        }
+    )
 }))
 
 app.use(passport.initialize())

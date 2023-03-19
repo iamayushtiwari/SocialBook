@@ -23,6 +23,12 @@ module.exports.signup = function (req, res) {
         title: 'User Signup'
     })
 }
+module.exports.destroySession = function(req,res){
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+} 
 //sigup and create a new user
 module.exports.create = function (req, res) {
     if (req.body.password != req.body.confirmPassword) {

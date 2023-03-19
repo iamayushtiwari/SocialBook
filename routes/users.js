@@ -8,6 +8,7 @@ router.get('/profile',passport.checkAuthentication,UserController.profile)
 router.get('/post', postController.post)
 router.get('/signin',UserController.signin)
 router.get('/signup',UserController.signup)
+router.get('/signout',UserController.destroySession)
 
 
 router.post('/create',UserController.create)
