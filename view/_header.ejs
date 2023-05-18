@@ -1,19 +1,18 @@
 <header>
-    Page header
-    <ul>
-        <% if(locals.user){%>
-            <li><%=user.name%></li>
-            <li>
-                <a href="/users/signout">signout</a>
-            </li>
-        <%}else{%>
-            <li>
-                <a href="/users/signin">signin</a>
-                
-            </li>
-            <li>
-                <a href="/users/signup">signup</a>
-            </li>
-            <%}%>
-    </ul>
+    <nav class="navbar navbar-dark bg-dark">
+        <!-- Navbar content -->
+        <ul class="topnav">
+            <li><a class="active" href="/">Home</a></li>
+            <% if(locals.user){%>
+                <li class="right">
+                    <a href="/users/signout">signout</a>
+                </li>
+                <li class="right"><a><%=user.name%></a></li>
+                <%}else{%>
+                    <li class="right"><a href="/users/signin">signin</a></li>
+                    <li class="right"><a href="/users/signup">signup</a></li>
+                    
+                    <%}%>
+        </ul>
+    </nav>
 </header>
