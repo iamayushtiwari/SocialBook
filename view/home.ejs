@@ -1,9 +1,29 @@
-<h3>SocialBook / <%= title %></h3>  
+<h3>SocialBook / <%= title %>
+</h3>
 
 <section id="feed-post">
-    <h4>Post</h4>
+    <h4>Posts</h4>
+    <%if(locals.user){%>
     <form action="/post/createPost" id="new-post-form" method="post">
         <textarea name="context" cols="30" rows="3"></textarea>
         <input type="submit" value="Post">
     </form>
+    <%}%>
+    <div>
+        <ul>
+            <% for(post of Post){%>
+                <li>
+                    <p>
+                        <%=post.context%>
+                            <br>
+                            <small>
+                                <%= post.user.name %>
+                                <br>
+                                <%= post.user.email %>
+                            </small>
+                    </p>
+                </li>
+                <%}%>
+        </ul>
+    </div>
 </section>
