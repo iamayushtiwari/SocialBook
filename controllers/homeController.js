@@ -12,7 +12,15 @@ module.exports.home = function(req,res){
     //     })
     // })
 
-    Post.find({}).populate('user').then(Posts => {
+    Post.find({})
+    .populate('user')
+    .populate({
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .then(Posts => {
         return res.render('home', {
             title: 'Home Page',
             Post: Posts
