@@ -2,9 +2,13 @@ const User = require('../models/user_Schema')
 
 module.exports.profile = function (req, res) {
     // return res.end('<h1>User Profile </h1>');
-    return res.render('userProfile', {
-        title: 'User Profile'
+    User.findOne({ _id: req.params.id }).then(user => {
+        return res.render('userProfile', {
+            title: 'User Profile',
+            userProfile : user  
+        })
     })
+    
 }
 module.exports.signin = function (req, res) {
     if(req.isAuthenticated()){
