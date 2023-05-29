@@ -12,7 +12,7 @@ module.exports.createComment = function (req, res) {
             }).then(comment => {
                 post.comments.push(comment._id)
                 post.save()
-                res.redirect('/')
+                return res.redirect('back')
             })
         }
     })

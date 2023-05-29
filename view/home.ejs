@@ -1,33 +1,34 @@
-<h3>SocialBook / <%= title %>
-</h3>
+<link rel="stylesheet" href="/css/home.css">
 
-<section id="feed-post">
-    <h4>Posts</h4>
-    <%if(locals.user){%>
-        <form action="/post/createPost" id="new-post-form" method="post">
-            <textarea name="context" cols="30" rows="3" required></textarea>
-            <input type="submit" value="Post">
-        </form>
-        <%}%>
+<div id="home-container">
+    <section id="feed-post">
+        <h4>Posts</h4>
+        <%if(locals.user){%>
+            <form action="/post/createPost" id="new-post-form" method="post">
+                <textarea name="context" cols="30" rows="3" required></textarea>
+                <input type="submit" value="Post">
+            </form>
+            <%}%>
+                <div>
+                    <ul>
+                        <% for(post of Post){%>
+                            <%-include('_post') -%>
+                                <%}%>
+                    </ul>
+                </div>
+    </section>
+    <section id="user-friends">
+        <%if(locals.user){%>
+            <h4>Friends</h4>
             <div>
                 <ul>
-                    <% for(post of Post){%>
-                        <%-include('_post') -%>
-                            <%}%>
+                    <% for(user of all_users){%>
+                        <li><a href="/users/profile/<%=user.id%>">
+                                <%=user.name%>
+                            </a></li>
+                        <%}%>
                 </ul>
             </div>
-</section>
-<section id="user-friends">
-    <%if(locals.user){%>
-        <h4>Users</h4>
-        <div>
-            <ul>
-                <% for(user of all_users){%>
-                    <li><a href="/users/profile/<%=user.id%>">
-                            <%=user.name%>
-                        </a></li>
-                    <%}%>
-            </ul>
-        </div>
-        <%}%>
-</section>
+            <%}%>
+    </section>
+</div>
