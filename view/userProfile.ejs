@@ -1,6 +1,16 @@
 <!-- <link rel="Stylesheet" href="/css/userProfile.css"> -->
 <h3>SocialBook / <%= title %></h3>
-<div class="container">
-    <p><%=userProfile.name%></p>
-    <p><%=userProfile.email%></p>
-</div>
+
+
+<%if(user.id == userProfile.id){%>
+    <form action="/users/update/<%=userProfile.id%>" method="post">
+        <input type="text" name="name" placeholder="Your Name" value="<%=userProfile.name%>" required>
+        <input type="email" name="email" placeholder="Your Email" value="<%=userProfile.email%>" required>
+        <input type="submit" value="Update">
+    </form>
+<%}else{%>
+    <div class="container">
+        <p><%=userProfile.name%></p>
+        <p><%=userProfile.email%></p>
+    </div>
+<%}%>
