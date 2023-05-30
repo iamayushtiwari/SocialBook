@@ -14,9 +14,11 @@ module.exports.update = function (req, res) {
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body)
         .then(user =>{
+            req.flash('success',`Your details has updated Successfully!`)
             return res.redirect('back')
         })
     }else{
+        req.flash('error',`Unauthorized`)
         return res.status(401).send('Unauthorized')
     }
 }
@@ -52,12 +54,15 @@ module.exports.create = function (req, res) {
     User.findOne({ email: req.body.email }).then(user => {
         if (!user) {
             User.create(req.body).then(user => {
+                req.flash('success',`Thanks for Creating Account ${user.name}`)
                 return res.redirect('/users/signin')
             }), function (err) {
                 console.log(err)
+                req.flash('error',err)
             }
         }
         else {
+            req.flash('error','Account already Created please Signin')
             return res.redirect('/users/signin')
         }
     }), function (err) {
