@@ -5,10 +5,10 @@ const User = require('../models/user_Schema')
 
 //authentication using passport
 
-passport.use(new LocalStrategy({ usernameField: "email" }, function (email, password, done) { 
+passport.use(new LocalStrategy({ usernameField: "email", passReqToCallback: true }, function (req,email, password, done) { 
     User.findOne({ email: email }).then(user => {
         if (!user || user.password != password) {
-            console.log('user not found or Invalid userName and Password')
+            req.flash('error','user not found or Invalid userName and Password')
             return done(null ,false)
         }
         return done(null ,user)
