@@ -23,6 +23,9 @@ app.use(sassMiddleware({
 //setup static folder path
 app.use(express.static('./assets'))
 
+//make the upload path available to browser
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(expressLayout)
 
 // express ulr encoded

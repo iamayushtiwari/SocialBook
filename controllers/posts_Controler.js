@@ -3,7 +3,15 @@ const Comment = require('../models/comments')
 
 module.exports.createPost = async function (req, res) {
     try {
-        await Post.create({ context: req.body.context, user: req.user._id })
+       let post =  await Post.create({ context: req.body.context, user: req.user._id })
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    post:post
+                },
+                message:"Post Created!"
+            })
+        }
         req.flash('success','Your Post has Published!')
         return res.redirect('back')
     } catch (err) {
