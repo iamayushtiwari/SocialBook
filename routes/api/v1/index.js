@@ -5,6 +5,6 @@ const userApi = require('../../../controllers/api/v1/user_API')
 
 router.get('/posts',postApi.index)
 router.delete('/:id',postApi.destroy)
-router.post('/user',userApi.createSession)
+router.use('/user',require('./UserApi'))
 
 module.exports = router
