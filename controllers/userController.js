@@ -108,5 +108,6 @@ module.exports.create = function (req, res) {
 //sigin and create a session for user
 module.exports.createSession = function (req, res) {
     req.flash('success','logged in Sucessfully!')
-    return res.redirect('/users/profile/'+req.user.id)
+    // return res.redirect('/users/profile/'+req.user.id)
+    return res.redirect('/')
 }
